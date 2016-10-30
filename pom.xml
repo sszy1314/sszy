@@ -1,0 +1,1404 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>mmt</groupId>
+	<name>my</name>
+	<artifactId>b2bmy</artifactId>
+	<version>4.3.0</version>
+	<packaging>war</packaging>
+	<organization>
+		<name>HC360.COM</name>
+		<url>http://www.hc360.com/</url>
+	</organization>
+	<inceptionYear>2000</inceptionYear>
+	<description>MMT项目组-商务中心项目</description>
+	<developers>
+		<developer>
+			<name>wangzilin</name>
+			<id>wangzilin</id>
+			<email>wangzilin@hc360.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<build_my_workspace>../build_my</build_my_workspace>
+	</properties>
+
+	<!-- 设定继承关系,继承一些公用的配置和依赖包 -->
+	<!--
+		<parent> <artifactId>build_my</artifactId> <groupId>mmt</groupId>
+		<version>4.3.0</version> <relativePath>build_my.xml</relativePath>
+		</parent>
+	-->
+
+
+	<dependencies>
+		<!-- mmt工程依赖 -->
+		<dependency>
+			<groupId>com.hc360</groupId>
+			<artifactId>hasclient</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<!-- 产品库新加入的包 S -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>hc-bcs</artifactId>
+			<version>4.4.89</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>hc-pss</artifactId>
+			<version>4.4.8</version>
+		</dependency>
+		<!-- 产品库新加入的包 E -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>b2b</artifactId>
+			<version>4.4.20160601.2</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>b2b-decoupling</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+ 		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>mmt</artifactId>
+			<version>4.4.20160811.2</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>slf4j-api</artifactId>
+					<groupId>slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.hc360.mmtlogutils</groupId>
+					<artifactId>mmtlogutils</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>hc-log4j</artifactId>
+					<groupId>hclog4j</groupId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.hc360.jms</groupId>
+  					<artifactId>jms-client</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<!-- mmt 内部类库 -->
+		<!-- fastjson -->
+		<!-- mmt工程依赖 -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>mmt-rsfservice</artifactId>
+			<version>1.4.90</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.hc360.rsf</groupId>
+		  <artifactId>hfb-rsfservice</artifactId>
+		  <version>1.1.4</version>
+		</dependency>
+		<!-- rsf-client 开始 -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>rsf-client</artifactId>
+			<version>1.3.5</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>hc-log4j</artifactId>
+					<groupId>hclog4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+			<version>2.0.7</version>
+		</dependency>
+		<!-- rsf-client 结束 -->
+
+		<!-- jms 新的短信接口 -->
+		<dependency>
+  			<groupId>com.hc360.jms</groupId>
+  			<artifactId>jms-client</artifactId>
+  			<version>0.1.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>mmtlogutils</artifactId>
+			<version>TRADE-1.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>mmtlogutils</artifactId>
+					<groupId>mmt</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+		  <groupId>com.hc360.timeout</groupId>
+		  <artifactId>HCTimeOut_mmtdao</artifactId>
+		  <version>0.2.7</version>
+		</dependency> 
+		<!--
+			<dependency> <groupId>mmt</groupId> <artifactId>mmt</artifactId>
+			<version>Cgt2-SNAPSHOT</version> <exclusions> <exclusion>
+			<artifactId>slf4j-log4j12</artifactId> <groupId>slf4j</groupId>
+			</exclusion> <exclusion> <artifactId>slf4j-api</artifactId>
+			<groupId>slf4j</groupId> </exclusion> </exclusions> </dependency>
+		-->
+
+		<dependency>
+			<groupId>com.hc360.hrmq</groupId>
+			<artifactId>hrmq-client</artifactId>
+			<version>1.3.6</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-lang</artifactId>
+					<groupId>commons-lang</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-collections</artifactId>
+					<groupId>commons-collections</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-configuration</artifactId>
+					<groupId>commons-configuration</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>mina.core</artifactId>
+					<groupId>org.apache.mina</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>hc-log4j</artifactId>
+					<groupId>hclog4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>hc-activemq-core</artifactId>
+			<version>5.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>chatmeet-service-client</groupId>
+			<artifactId>chatmeet-service-client</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>im_soap_client</groupId>
+			<artifactId>im_soap_client</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>imgup</groupId>
+			<artifactId>imgup</artifactId>
+			<version>4.4.0.66</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.im4java</groupId>
+			<artifactId>im4java</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>onlineclient</groupId>
+			<artifactId>onlineclient</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<!-- 单点登陆 (4.5版本开始支持百度商贸登录) -->
+		<dependency>
+			<groupId>sso</groupId>
+			<artifactId>sso-client</artifactId>
+			<version>4.5</version>
+<!-- 			<version>4.4.20</version> -->
+		</dependency>
+		<!-- cookie -->
+		<dependency>
+			<groupId>cookie</groupId>
+			<artifactId>cookie-client</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- 权限控制组件 -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>mmt-security</artifactId>
+			<version>1.0.0</version>
+
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>hc360-1.0.0</version>
+		</dependency>
+		<!-- IM3.0 -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>b2bservice-im</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<!-- 非运行时所需的类库 -->
+		<dependency>
+			<groupId>servletapi</groupId>
+			<artifactId>servletapi</artifactId>
+			<version>2.4</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>ojdbc14</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>1.0</version>
+			<!--<scope>provided</scope>-->
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<!-- guard 监控  -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>guard</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.velocity</groupId>
+					<artifactId>velocity</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 第3方类库声明 -->
+		<dependency>
+			<groupId>activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>activeio</groupId>
+			<artifactId>activeio-core</artifactId>
+			<version>3.0.0-incubator</version>
+		</dependency>
+
+		<dependency>
+			<groupId>annogen</groupId>
+			<artifactId>annogen</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>antlr</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-attrs</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>avalon-framework</groupId>
+			<artifactId>avalon-framework-api</artifactId>
+			<version>4.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>avalon-framework</groupId>
+			<artifactId>avalon-framework-impl</artifactId>
+			<version>4.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>avalon-logkit</groupId>
+			<artifactId>avalon-logkit</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axiom</groupId>
+			<artifactId>axiom-api</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axiom</groupId>
+			<artifactId>axiom-dom</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axiom</groupId>
+			<artifactId>axiom-impl</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+
+		<!-- dxx add  -->
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-adb</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-adb-codegen</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-codegen</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-fastinfoset</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-java2wsdl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-jaxbri</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-jaxws</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-jaxws-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-jibx</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-json</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>MMTConstants</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-kernel</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-metadata</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-saaj</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-saaj-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-soapmonitor</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-spring</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-tools</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>axis2</groupId>
+			<artifactId>axis2-xmlbeans</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis-ant</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>b2bservice</groupId>
+			<artifactId>b2bservice-client</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>backport-util-concurrent</groupId>
+			<artifactId>backport-util-concurrent</artifactId>
+			<version>2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>carol</groupId>
+			<artifactId>carol</artifactId>
+			<version>2.0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cbclient</groupId>
+			<artifactId>cbclient</artifactId>
+			<version>2871a</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cbcrypto</groupId>
+			<artifactId>cbcrypto</artifactId>
+			<version>0.12a</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils-core</artifactId>
+			<version>1.7.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-collections</groupId>
+					<artifactId>commons-collections</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-collections</groupId>
+					<artifactId>commons-collections</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>1.7</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-collections</groupId>
+					<artifactId>commons-collections</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-discovery</groupId>
+			<artifactId>commons-discovery</artifactId>
+			<version>0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-email</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2</version>
+			<!--
+				<exclusions> <exclusion> <groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId> </exclusion> </exclusions>
+			-->
+		</dependency>
+
+		<!-- tencent weibo httpclient  -->
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient-cache</artifactId>
+			<version>4.1.3</version>
+		</dependency>
+		<!--
+			<dependency> <groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId> <version>4.1.4</version>
+			</dependency>
+		-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>tencent</groupId>
+			<artifactId>weibo-client</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+
+		<!-- tencent weibo httpclient end -->
+		<dependency>
+			<groupId>thirdparty.Tidy</groupId>
+			<artifactId>Tidy</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-pool</groupId>
+			<artifactId>commons-pool</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>concurrent</groupId>
+			<artifactId>concurrent</artifactId>
+			<version>1.3.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>connector</groupId>
+			<artifactId>connector</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cryptix</groupId>
+			<artifactId>cryptix</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.loskutov.BytecodeOutline</groupId>
+			<artifactId>de.loskutov.BytecodeOutline</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ecs</groupId>
+			<artifactId>ecs</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>excalibur</groupId>
+			<artifactId>excalibur-component</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>excalibur</groupId>
+			<artifactId>excalibur-instrument-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>excalibur-logger</groupId>
+			<artifactId>excalibur-logger</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>excalibur</groupId>
+			<artifactId>excalibur-pool-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-j2ee-management_1.0_spec</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jms_1.1_spec</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>geronimo-spec</groupId>
+			<artifactId>geronimo-spec-jms</artifactId>
+			<version>1.1-rc4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>hibernate</groupId>
+			<artifactId>hibernate</artifactId>
+			<version>3.2.5.ga</version>
+		</dependency>
+
+		<dependency>
+			<groupId>howl</groupId>
+			<artifactId>howl</artifactId>
+			<version>0.1.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>httpunit</groupId>
+			<artifactId>httpunit</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+		<!--
+			<dependency> <groupId>jaas</groupId> <artifactId>jaas</artifactId>
+			<version>final</version> </dependency>
+		-->
+
+		<dependency>
+			<groupId>jacc</groupId>
+			<artifactId>jacc-1_0-fr</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta</groupId>
+			<artifactId>jakarta-httpcore</artifactId>
+			<version>4.0-alpha4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>java_memcached</groupId>
+			<artifactId>java_memcached-release</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jaxb</groupId>
+			<artifactId>jaxb-xjc</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>1.1-beta-10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jaxrpc</groupId>
+			<artifactId>jaxrpc</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jboss</groupId>
+			<artifactId>jboss-cache</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jboss</groupId>
+			<artifactId>jboss-common</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jboss</groupId>
+			<artifactId>jboss-jmx</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jboss</groupId>
+			<artifactId>jboss-system</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jcs</groupId>
+			<artifactId>jcs</artifactId>
+			<version>1.2.7.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<!--
+			<dependency> <groupId>jettison</groupId>
+			<artifactId>jettison</artifactId> <version>1.1</version>
+			</dependency>
+		-->
+		<dependency>
+			<groupId>jgroups</groupId>
+			<artifactId>jgroups</artifactId>
+			<version>2.2.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jibx</groupId>
+			<artifactId>jibx-bind</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jibx</groupId>
+			<artifactId>jibx-run</artifactId>
+			<version>1.1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jotm</groupId>
+			<artifactId>jotm</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jotm</groupId>
+			<artifactId>jotm_iiop_stubs</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jotm</groupId>
+			<artifactId>jotm_jrmp_stubs</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jta</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jts1_0</groupId>
+			<artifactId>jts1_0</artifactId>
+			<version>final</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>jython</groupId>
+			<artifactId>jython</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+		<!--
+			<dependency> <groupId>mail</groupId> <artifactId>mail</artifactId>
+			<version>1.4</version> </dependency>
+		-->
+
+		<dependency>
+			<groupId>neethi</groupId>
+			<artifactId>neethi</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>objectweb-datasource</groupId>
+			<artifactId>objectweb-datasource</artifactId>
+			<version>final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.objectweb.asm</groupId>
+			<artifactId>org.objectweb.asm</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>oro</groupId>
+			<artifactId>oro</artifactId>
+			<version>2.0.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>oscache</groupId>
+			<artifactId>oscache</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>proxool</groupId>
+			<artifactId>proxool</artifactId>
+			<version>0.8.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>saaj</groupId>
+			<artifactId>saaj</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<!--
+			<dependency> <groupId>spring</groupId>
+			<artifactId>spring</artifactId> <version>2.0.3</version>
+			</dependency>
+		-->
+
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-api</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-utils</artifactId>
+			<version>20060915</version>
+		</dependency>
+
+		<dependency>
+			<groupId>stratum</groupId>
+			<artifactId>stratum</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>syndiag</groupId>
+			<artifactId>syndiag</artifactId>
+			<version>2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>torque</groupId>
+			<artifactId>torque</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>turbine</groupId>
+			<artifactId>turbine</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>village</groupId>
+			<artifactId>village</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>woden</groupId>
+			<artifactId>woden</artifactId>
+			<version>1.0-incubating-M7a</version>
+		</dependency>
+
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>wstx-asl</groupId>
+			<artifactId>wstx-asl</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xapool</groupId>
+			<artifactId>xapool</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>xbean</groupId>
+			<artifactId>xbean</artifactId>
+			<version>2.2.0</version>
+		</dependency>-->
+ 
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.9.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.3.04</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xmlrpc</groupId>
+			<artifactId>xmlrpc</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>XmlSchema</groupId>
+			<artifactId>XmlSchema</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<!--excel相关 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        
+		<!--json解析相关 -->
+		<dependency>
+			<groupId>json</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.3-jdk15</version>
+		</dependency>
+		<dependency>
+			<groupId>ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<!--dxx修改为junit4-->
+			<version>4.10</version>
+		</dependency>
+		<!-- add by kh 商务中心的灰度发布包 @2014.3.6 STA-->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>switchman</artifactId>
+			<version>0.0.10-SNAPSHOT</version>
+		</dependency>
+		<!-- add by kh 商务中心的XSS过滤包 @2014.3.14 STA-->
+	    <dependency>
+			<groupId>com.hc360.waf</groupId>
+			<artifactId>waf</artifactId>
+			<version>1.1.3-SNAPSHOT</version>
+		</dependency>
+
+	<dependency>
+		<groupId>com.hc360.hbase</groupId>
+		<artifactId>HBaseHelperClient</artifactId>
+		<version>1.2.4</version>
+		<exclusions>
+		  	<exclusion>
+		  		<groupId>org.apache.hbase</groupId>
+		    	<artifactId>hbase-server</artifactId>
+		    </exclusion>
+		  	<exclusion>
+		  		<artifactId>activation</artifactId>
+		  		<groupId>javax.activation</groupId>
+		  	</exclusion>
+		  </exclusions>
+	</dependency>
+
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>configure-client</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.29</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.hc360.buyer</groupId>
+			<artifactId>buyer.kernel</artifactId>
+			<version>0.1.15</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.thrift</groupId>
+			<artifactId>libthrift7</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+
+		<!-- <dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>2.4.1</version>
+		</dependency> -->
+
+		<!--
+			<dependency> <groupId>mmt</groupId>
+			<artifactId>rsf-client</artifactId> <version>1.3.0</version>
+			</dependency>
+		-->
+		<dependency>
+			<groupId>central.org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>2.5.6</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>hc-storm</groupId>
+			<artifactId>storm</artifactId>
+			<version>0.8.1</version>
+		</dependency>
+
+		<!-- 后来加的 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.activation</groupId>
+					<artifactId>activation</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.1_3</version>
+		</dependency>
+
+		<!-- 实时计算结束 -->
+
+		<!-- 批量转在线交易组件 -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>bst-service</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<!-- 微炫铺-单向街接口内容 -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>dxj-weisite</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<!-- 炫铺二维码 -->
+		<dependency>
+			<groupId>mmt</groupId>
+			<artifactId>mmt-dimensionalcode</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		
+		<!-- 商机发布页产品模板 -->
+		<dependency>
+		  <groupId>org.jsoup</groupId>
+		  <artifactId>jsoup</artifactId>
+		  <version>1.7.3</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.mockito</groupId>
+		  <artifactId>mockito-all</artifactId>
+		  <version>1.9.5</version>
+		  <scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.hc360.hfb</groupId>
+			<artifactId>pay-provider</artifactId>
+			<version>1.1</version>
+		</dependency>
+
+        <!-- 用于图片处理 -->
+        <dependency>
+            <groupId>itext</groupId>
+            <artifactId>itext</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        
+        <!-- 王华存新增 多账户修改用户名 -->
+        <dependency>
+            <groupId>com.hc360.redis</groupId>
+            <artifactId>RedisClient</artifactId>
+            <version>0.0.56-cluster</version>
+        </dependency>
+        
+        <!-- 超时组件 -->
+	</dependencies>
+
+
+	<build>
+
+		<!-- 除了生成class文件外，还需要将一些配置文件copy到编译目录中以便包含在jar中 -->
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+					<include>**/*.tld</include>
+					<include>**/*.vm</include>
+					<include>**/*.ccf</include>
+				</includes>
+			</resource>
+		</resources>
+
+		<directory>${project.basedir}/build</directory>
+		<outputDirectory>${project.basedir}/web/WEB-INF/classes</outputDirectory>
+		<finalName>${project.artifactId}</finalName>
+		<testOutputDirectory>${project.basedir}/test-classes</testOutputDirectory>
+		<sourceDirectory>${project.basedir}/src/</sourceDirectory>
+		<testSourceDirectory>${project.basedir}/test/</testSourceDirectory>
+
+		<pluginManagement>
+			<plugins>
+				<!-- 使用m2e 插件时需要配置这段，否则 下面 “copy-dependencies”配置将会报错。 -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.0,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>gbk</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<reportsDirectory>
+						${build_my_workspace}/test-results
+					</reportsDirectory>
+					<testFailureIgnore>true</testFailureIgnore>
+
+					<!-- 指定运行某部分用例 -->
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+
+				<configuration>
+					<archiveClasses>true</archiveClasses>
+					<warSourceDirectory>
+						${project.basedir}/web
+					</warSourceDirectory>
+					<warSourceExcludes>
+						**/CVS,**/*.jar,**/*.class
+					</warSourceExcludes>
+				</configuration>
+			</plugin>
+
+<!-- 			<plugin> -->
+<!-- 				<artifactId>maven-dependency-plugin</artifactId> -->
+<!-- 				<configuration> -->
+<!-- 					<outputDirectory>${project.basedir}/web/WEB-INF/lib</outputDirectory> -->
+<!-- 					<excludeTransitive>false</excludeTransitive> -->
+<!-- 					<stripVersion>true</stripVersion> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
+		</plugins>
+	</build>
+
+</project>
