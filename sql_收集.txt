@@ -1,0 +1,4 @@
+SELECT oct.typecode,oct.typename,oct.parentcode  FROM wcdata.order_consult_type oct WHERE oct.typecode NOT IN (1)   AND oct.parentcode NOT IN (1) START WITH 
+ oct.parentcode IN (1) AND oct.isvalid='1' CONNECT BY PRIOR oct.typecode = oct.parentcode AND oct.isvalid='1' 
+ ORDER BY oct.parentcode, oct.typecode;
+
