@@ -1133,7 +1133,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<!--dxx修改为junit4-->
-			<version>4.10</version>
+			<version>4.13.1</version>
 		</dependency>
 		<!-- add by kh 商务中心的灰度发布包 @2014.3.6 STA-->
 		<dependency>
